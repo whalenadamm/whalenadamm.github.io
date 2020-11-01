@@ -1,5 +1,5 @@
 ---
-title: "NYC Airbnb Data in Plotly"
+title: "NYC Restaurant Inspection Data in Plotly"
 output: 
   html_document:
     code_folding: hide
@@ -29,5 +29,36 @@ scale_colour_discrete = scale_color_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
-Let's take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set's [host website](https://p8105.com/dataset_restaurant_inspections.html), where additional links to the current raw data can also be found. 
+Let's take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set's [host website](https://p8105.com/dataset_restaurant_inspections.html), where additional links to the current raw data and a data dictionary can also be found. 
+
+### Import and inspect the data
+
+```{r inspect, message = FALSE}
+data("rest_inspec")
+
+rest_inspec %>% 
+  filter(boro == "MANHATTAN") %>% 
+  select(cuisine_description) %>% 
+  group_by(cuisine_description) %>% 
+  summarize(fqcy = n()) %>% 
+  knitr::kable()
+```
+
+Due to the size of the dataset (`r nrow(rest_inspec)` observations), let's just look at restaurants with critical violations in Manhattan. First, an essential cuisine in New York: pizza.
+
+### Pizza Plot
+
+```{r}
+pizza_df = 
+  rest_inspec %>% 
+  filter(
+    boro == "MANHATTAN", 
+    critical_flag == "Critical",
+    cuisine_description == c("Pizza", "Pizza/Italian")
+  ) %>% 
+  select(-c(camis, phone, record_date, inspection_date))
+```
+
+
+
 

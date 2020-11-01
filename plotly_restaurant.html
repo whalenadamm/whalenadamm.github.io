@@ -11,7 +11,7 @@
 
 
 
-<title>NYC Airbnb Data in Plotly</title>
+<title>NYC Restaurant Inspection Data in Plotly</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -403,12 +403,373 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">NYC Airbnb Data in Plotly</h1>
+<h1 class="title toc-ignore">NYC Restaurant Inspection Data in Plotly</h1>
 
 </div>
 
 
-<p>Let’s take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set’s <a href="https://p8105.com/dataset_restaurant_inspections.html">host website</a>, where additional links to the current raw data can also be found.</p>
+<p>Let’s take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set’s <a href="https://p8105.com/dataset_restaurant_inspections.html">host website</a>, where additional links to the current raw data and a data dictionary can also be found.</p>
+<div id="import-and-inspect-the-data" class="section level3">
+<h3>Import and inspect the data</h3>
+<pre class="r"><code>data(&quot;rest_inspec&quot;)
+
+rest_inspec %&gt;% 
+  filter(boro == &quot;MANHATTAN&quot;) %&gt;% 
+  select(cuisine_description) %&gt;% 
+  group_by(cuisine_description) %&gt;% 
+  summarize(fqcy = n()) %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">cuisine_description</th>
+<th align="right">fqcy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Afghan</td>
+<td align="right">52</td>
+</tr>
+<tr class="even">
+<td align="left">African</td>
+<td align="right">482</td>
+</tr>
+<tr class="odd">
+<td align="left">American</td>
+<td align="right">46462</td>
+</tr>
+<tr class="even">
+<td align="left">Armenian</td>
+<td align="right">214</td>
+</tr>
+<tr class="odd">
+<td align="left">Asian</td>
+<td align="right">2907</td>
+</tr>
+<tr class="even">
+<td align="left">Australian</td>
+<td align="right">166</td>
+</tr>
+<tr class="odd">
+<td align="left">Bagels/Pretzels</td>
+<td align="right">1047</td>
+</tr>
+<tr class="even">
+<td align="left">Bakery</td>
+<td align="right">3441</td>
+</tr>
+<tr class="odd">
+<td align="left">Bangladeshi</td>
+<td align="right">164</td>
+</tr>
+<tr class="even">
+<td align="left">Barbecue</td>
+<td align="right">425</td>
+</tr>
+<tr class="odd">
+<td align="left">Basque</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Bottled beverages, including water, sodas, juices, etc.</td>
+<td align="right">405</td>
+</tr>
+<tr class="odd">
+<td align="left">Brazilian</td>
+<td align="right">226</td>
+</tr>
+<tr class="even">
+<td align="left">CafÃ©/Coffee/Tea</td>
+<td align="right">8259</td>
+</tr>
+<tr class="odd">
+<td align="left">Californian</td>
+<td align="right">15</td>
+</tr>
+<tr class="even">
+<td align="left">Caribbean</td>
+<td align="right">752</td>
+</tr>
+<tr class="odd">
+<td align="left">Chicken</td>
+<td align="right">1331</td>
+</tr>
+<tr class="even">
+<td align="left">Chilean</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="left">Chinese</td>
+<td align="right">10893</td>
+</tr>
+<tr class="even">
+<td align="left">Chinese/Cuban</td>
+<td align="right">168</td>
+</tr>
+<tr class="odd">
+<td align="left">Chinese/Japanese</td>
+<td align="right">438</td>
+</tr>
+<tr class="even">
+<td align="left">Continental</td>
+<td align="right">387</td>
+</tr>
+<tr class="odd">
+<td align="left">Creole</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="left">Delicatessen</td>
+<td align="right">2876</td>
+</tr>
+<tr class="odd">
+<td align="left">Donuts</td>
+<td align="right">1519</td>
+</tr>
+<tr class="even">
+<td align="left">Eastern European</td>
+<td align="right">318</td>
+</tr>
+<tr class="odd">
+<td align="left">Egyptian</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">English</td>
+<td align="right">195</td>
+</tr>
+<tr class="odd">
+<td align="left">Ethiopian</td>
+<td align="right">222</td>
+</tr>
+<tr class="even">
+<td align="left">Filipino</td>
+<td align="right">100</td>
+</tr>
+<tr class="odd">
+<td align="left">French</td>
+<td align="right">4157</td>
+</tr>
+<tr class="even">
+<td align="left">Fruits/Vegetables</td>
+<td align="right">31</td>
+</tr>
+<tr class="odd">
+<td align="left">German</td>
+<td align="right">284</td>
+</tr>
+<tr class="even">
+<td align="left">Greek</td>
+<td align="right">780</td>
+</tr>
+<tr class="odd">
+<td align="left">Hamburgers</td>
+<td align="right">1830</td>
+</tr>
+<tr class="even">
+<td align="left">Hawaiian</td>
+<td align="right">101</td>
+</tr>
+<tr class="odd">
+<td align="left">Hotdogs</td>
+<td align="right">138</td>
+</tr>
+<tr class="even">
+<td align="left">Hotdogs/Pretzels</td>
+<td align="right">81</td>
+</tr>
+<tr class="odd">
+<td align="left">Ice Cream, Gelato, Yogurt, Ices</td>
+<td align="right">990</td>
+</tr>
+<tr class="even">
+<td align="left">Indian</td>
+<td align="right">2850</td>
+</tr>
+<tr class="odd">
+<td align="left">Indonesian</td>
+<td align="right">46</td>
+</tr>
+<tr class="even">
+<td align="left">Iranian</td>
+<td align="right">39</td>
+</tr>
+<tr class="odd">
+<td align="left">Irish</td>
+<td align="right">2201</td>
+</tr>
+<tr class="even">
+<td align="left">Italian</td>
+<td align="right">10274</td>
+</tr>
+<tr class="odd">
+<td align="left">Japanese</td>
+<td align="right">8324</td>
+</tr>
+<tr class="even">
+<td align="left">Jewish/Kosher</td>
+<td align="right">1187</td>
+</tr>
+<tr class="odd">
+<td align="left">Juice, Smoothies, Fruit Salads</td>
+<td align="right">1361</td>
+</tr>
+<tr class="even">
+<td align="left">Korean</td>
+<td align="right">1764</td>
+</tr>
+<tr class="odd">
+<td align="left">Latin (Cuban, Dominican, Puerto Rican, South &amp; Central American)</td>
+<td align="right">4177</td>
+</tr>
+<tr class="even">
+<td align="left">Mediterranean</td>
+<td align="right">1960</td>
+</tr>
+<tr class="odd">
+<td align="left">Mexican</td>
+<td align="right">5138</td>
+</tr>
+<tr class="even">
+<td align="left">Middle Eastern</td>
+<td align="right">810</td>
+</tr>
+<tr class="odd">
+<td align="left">Moroccan</td>
+<td align="right">235</td>
+</tr>
+<tr class="even">
+<td align="left">Not Listed/Not Applicable</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">Nuts/Confectionary</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">Other</td>
+<td align="right">797</td>
+</tr>
+<tr class="odd">
+<td align="left">Pakistani</td>
+<td align="right">113</td>
+</tr>
+<tr class="even">
+<td align="left">Pancakes/Waffles</td>
+<td align="right">36</td>
+</tr>
+<tr class="odd">
+<td align="left">Peruvian</td>
+<td align="right">258</td>
+</tr>
+<tr class="even">
+<td align="left">Pizza</td>
+<td align="right">5460</td>
+</tr>
+<tr class="odd">
+<td align="left">Pizza/Italian</td>
+<td align="right">2269</td>
+</tr>
+<tr class="even">
+<td align="left">Polish</td>
+<td align="right">73</td>
+</tr>
+<tr class="odd">
+<td align="left">Polynesian</td>
+<td align="right">37</td>
+</tr>
+<tr class="even">
+<td align="left">Portuguese</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">Russian</td>
+<td align="right">226</td>
+</tr>
+<tr class="even">
+<td align="left">Salads</td>
+<td align="right">593</td>
+</tr>
+<tr class="odd">
+<td align="left">Sandwiches</td>
+<td align="right">2130</td>
+</tr>
+<tr class="even">
+<td align="left">Sandwiches/Salads/Mixed Buffet</td>
+<td align="right">1678</td>
+</tr>
+<tr class="odd">
+<td align="left">Scandinavian</td>
+<td align="right">56</td>
+</tr>
+<tr class="even">
+<td align="left">Seafood</td>
+<td align="right">1283</td>
+</tr>
+<tr class="odd">
+<td align="left">Soul Food</td>
+<td align="right">415</td>
+</tr>
+<tr class="even">
+<td align="left">Soups</td>
+<td align="right">19</td>
+</tr>
+<tr class="odd">
+<td align="left">Soups &amp; Sandwiches</td>
+<td align="right">432</td>
+</tr>
+<tr class="even">
+<td align="left">Southwestern</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">Spanish</td>
+<td align="right">2413</td>
+</tr>
+<tr class="even">
+<td align="left">Steak</td>
+<td align="right">807</td>
+</tr>
+<tr class="odd">
+<td align="left">Tapas</td>
+<td align="right">418</td>
+</tr>
+<tr class="even">
+<td align="left">Tex-Mex</td>
+<td align="right">814</td>
+</tr>
+<tr class="odd">
+<td align="left">Thai</td>
+<td align="right">2873</td>
+</tr>
+<tr class="even">
+<td align="left">Turkish</td>
+<td align="right">641</td>
+</tr>
+<tr class="odd">
+<td align="left">Vegetarian</td>
+<td align="right">896</td>
+</tr>
+<tr class="even">
+<td align="left">Vietnamese/Cambodian/Malaysia</td>
+<td align="right">766</td>
+</tr>
+</tbody>
+</table>
+<p>Due to the size of the dataset (397584 observations), let’s just look at restaurants with critical violations in Manhattan. First, an essential cuisine in New York: pizza.</p>
+</div>
+<div id="pizza-plot" class="section level3">
+<h3>Pizza Plot</h3>
+<pre class="r"><code>pizza_df = 
+  rest_inspec %&gt;% 
+  filter(
+    boro == &quot;MANHATTAN&quot;, 
+    critical_flag == &quot;Critical&quot;,
+    cuisine_description == c(&quot;Pizza&quot;, &quot;Pizza/Italian&quot;)
+  ) %&gt;% 
+  select(-c(camis, phone, record_date, inspection_date))</code></pre>
+</div>
 
 
 
