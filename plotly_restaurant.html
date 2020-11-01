@@ -11,7 +11,7 @@
 
 
 
-<title>Curriculum Vitae</title>
+<title>NYC Airbnb Data in Plotly</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,6 +23,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -250,6 +251,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -389,46 +393,22 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
-
-
-<h1 class="title toc-ignore">Curriculum Vitae</h1>
-
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
 </div>
 
 
-<div id="education" class="section level2">
-<h2>Education</h2>
-<div id="columbia-university-mailman-school-of-public-health" class="section level3">
-<h3>Columbia University Mailman School of Public Health</h3>
-Master of Public Health in Epidemiology, Certificate in Applied Biostatistics <br> Anticipated completion date: April 2021 <br> Relevant Coursework:
-<ul>
-<li>
-Data Science I
-<li>
-Relational Databases and SQL Programming for Public Health and Data Science
-<ul>
+
+<h1 class="title toc-ignore">NYC Airbnb Data in Plotly</h1>
+
 </div>
-<div id="santa-clara-university" class="section level3">
-<h3>Santa Clara University</h3>
-<p>Bachelor of Science in Public Health Science and Biology, Emphasis in Biomedical Sciences <br> Completion date: June 2015</p>
-</div>
-</div>
-<div id="employment-history" class="section level2">
-<h2>Employment History</h2>
-<div id="msph" class="section level3">
-<h3>MSPH</h3>
-</div>
-<div id="nyc-department-of-health-and-mental-hygiene" class="section level3">
-<h3>NYC Department of Health and Mental Hygiene</h3>
-<p>HRTP Graduate Research Intern <br> Research and Methodology Unit, Bureau of Epidemiology Services</p>
-</div>
-</div>
-<div id="publications" class="section level2">
-<h2>Publications</h2>
-</div>
-<div id="awards-and-recognition" class="section level2">
-<h2>Awards and Recognition</h2>
-</div>
+
+
+<p>Let’s take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set’s <a href="https://p8105.com/dataset_restaurant_inspections.html">host website</a>, where additional links to the current raw data can also be found.</p>
 
 
 
@@ -465,6 +445,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

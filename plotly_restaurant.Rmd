@@ -1,0 +1,33 @@
+---
+title: "NYC Airbnb Data in Plotly"
+output: 
+  html_document:
+    code_folding: hide
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+
+knitr::opts_chunk$set(
+  fig.width = 6,
+  fig.asp = .6,
+  out.width = "90%"
+)
+
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+
+scale_colour_discrete = scale_color_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
+
+Let's take a look at data from NYC restaurant inspections. This data set contains information about the results of food safety inspections conducted by the New York City Department of Health and Mental Hygiene. It was taken from the DOHMH via NYC Open Data in October 2017. To learn more, please visit the data set's [host website](https://p8105.com/dataset_restaurant_inspections.html), where additional links to the current raw data can also be found. 
+

@@ -2,20 +2,34 @@
 title: "Curriculum Vitae"
 output: 
   html_document:
-    code_folding: hide
     toc: true
     toc_float: true
 ---
 
 ## Education
 
-#### Columbia University Mailman School of Public Health
+### Columbia University Mailman School of Public Health
 
 Master of Public Health in Epidemiology, Certificate in Applied Biostatistics
 <br> Anticipated completion date: April 2021
+<br> Relevant Coursework:
+<ul><li>Data Science I
+<li>Relational Databases and SQL Programming for Public Health and Data Science
+<ul>
 
-#### Santa Clara University
+### Santa Clara University
 
 Bachelor of Science in Public Health Science and Biology, Emphasis in Biomedical Sciences
 <br> Completion date: June 2015
 
+## Employment History
+
+### MSPH
+
+### NYC Department of Health and Mental Hygiene
+HRTP Graduate Research Intern
+<br> Research and Methodology Unit, Bureau of Epidemiology Services
+
+## Publications
+
+## Awards and Recognition
