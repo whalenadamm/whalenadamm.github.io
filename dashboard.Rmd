@@ -1,0 +1,128 @@
+---
+title: "NYC Restaurant Inspection Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r df_setup}
+data("rest_inspec")
+
+rest_list = 
+  rest_inspec %>% 
+  filter(boro == "MANHATTAN") %>% 
+  select(cuisine_description) %>% 
+  group_by(cuisine_description) %>% 
+  summarize(fqcy = n()) %>% 
+  filter(fqcy >= 2000) %>% 
+  select(-fqcy)
+
+restaurants_df = 
+  rest_inspec %>% 
+  inner_join(rest_list, by = "cuisine_description") %>% 
+  filter(boro == "MANHATTAN") %>% 
+  mutate(
+    cuisine_description = recode(cuisine_description, 
+           "CafÃ©/Coffee/Tea" = "Cafe",
+           "Latin (Cuban, Dominican, Puerto Rican, South & Central American)" = "Latin")
+  ) %>% 
+  select(-c(camis, building, street, phone, record_date)) %>% 
+  drop_na(score, grade, critical_flag, inspection_type)
+
+pizza_df = 
+  restaurants_df %>% 
+  filter(
+    cuisine_description == c("Pizza", "Pizza/Italian")
+  )
+
+closure_df = 
+  rest_inspec %>% 
+  filter(str_detect(action, "[cC]losed") == TRUE,
+    critical_flag == "Critical",
+    inspection_date > "2016-01-01" & inspection_date <= "2017-12-31"
+  ) %>% 
+  select(-c(building, street, phone, record_date)) %>% 
+  mutate(
+    inspection_date = as.Date(inspection_date),
+    camis = as.character(camis),
+    dba = str_to_title(dba)
+  )
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Restaurant Closures
+
+```{r}
+closure_df %>%
+  mutate(
+    text_label = str_c(
+      "", dba,
+      "\n", inspection_date,
+      "\nScore: ", score
+    )
+  ) %>% 
+  plot_ly(x = ~inspection_date, y = ~score, color = ~boro, type = "scatter", 
+    colors = "viridis", alpha = 0.5, text = ~text_label) %>% 
+    layout(xaxis = list(title = "Inspection Date"), 
+         yaxis = list(title = "Score"))
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Median Score by Cuisine
+
+```{r}
+restaurants_df %>% 
+  filter(
+    grade %in% c("A", "B", "C"),
+    critical_flag != "Not Applicable"
+  ) %>% 
+  group_by(cuisine_description, grade) %>% 
+  summarize(med_score = median(score)) %>% 
+  mutate(
+    text_label = str_c(
+      "", cuisine_description,
+      "\nMedian Score: ", med_score, 
+      "\nGrade: ", grade
+      )
+  ) %>% 
+  plot_ly(
+    x = ~cuisine_description, y = ~med_score, color = ~grade,
+    text = ~text_label, type = "bar", colors = "viridis"
+  ) %>% 
+  layout(xaxis = list(title = "", tickangle = -45), 
+         yaxis = list(title = "Median Score"),
+         bargap = 0.25,
+         legend = list(title = list(text = "Grade")))
+```
+
+### Score and Grade distribution for Manhattan Pizza Shops
+
+```{r}
+pizza_df %>% 
+  filter(
+    grade %in% c("A", "B", "C"),
+    critical_flag != "Not Applicable"
+  ) %>% 
+  mutate(
+    grade = as.factor(grade),
+    text_label = str_c("Grade: ", grade, "\nScore: ", score)     
+  ) %>% 
+  plot_ly(x = ~grade, y = ~score, color = ~critical_flag, text = ~text_label,
+    type = "box", colors = "viridis", alpha = 0.5
+  ) %>% 
+  layout(boxmode = "group", boxgap = .25, boxgroupgap = 0.5)
+```
+

@@ -180,5 +180,5 @@ While it can be a bit difficult to tell, this plot shows that there were more in
 
 ### Dashboard
 
-To see the composite dashboard of this analysis, please visit the dashboard page. 
+To see the composite dashboard of this analysis, please visit the [dashboard](dashboard.html) page. 
 

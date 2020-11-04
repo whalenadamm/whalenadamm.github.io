@@ -7,12 +7,12 @@ navbar:
       href: cv.html
     - text: "Plotly Example"
       href: plotly_restaurant.html
+    - text: "Dashboard"
+      href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<whalen.adamm@gmail.com>
     - icon: fa-linkedin fa-lg
       href: https://www.linkedin.com/in/whalenadamm/
-    - icon: fa-twitter fa-lg
-      href: https://twitter.com/whaleMPH
     - icon: fa-github fa-lg
       href: http://github.com/whalenadamm/
 output:
