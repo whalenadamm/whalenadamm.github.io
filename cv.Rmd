@@ -9,27 +9,114 @@ output:
 ## Education
 
 ### Columbia University Mailman School of Public Health
+#### New York, NY
 
 Master of Public Health in Epidemiology, Certificate in Applied Biostatistics
 <br> Anticipated completion date: April 2021
+<br>GPA: 4.0
 <br> Relevant Coursework:
 <ul><li>Data Science I
 <li>Relational Databases and SQL Programming for Public Health and Data Science
-<ul>
+<li>Application of Epidemiologic Research Methods
+<li>Applied Epidemiologic Analysis 
+<li>Analysis of Categorical Data
+<li>Design & Conduct of Observational Epidemiology
+<li>Applied Regression I & II
+<li>Spatial Epidemiology
+<br>President, Students for a National Health Program, Mailman Chapter
 
 ### Santa Clara University
+#### Santa Clara, CA
 
 Bachelor of Science in Public Health Science and Biology, Emphasis in Biomedical Sciences
 <br> Completion date: June 2015
+<br> Honors Thesis: From the Ground Up: An Evidence-Based Intervention Proposal to Implement School Gardens as a Means to Reduce Type II Diabetes Incidence among Low-Income, At-Risk Populations
 
 ## Employment History
 
-### MSPH
+### Columbia University Mailman School of Public Health
+#### New York, NY
+
+Fall 2020
+<br>Lead Teaching Assistant
+<br>Research Methods and Applications: Quantitative Foundations
+<ul><li>Administered cohort-wide introductory epidemiology and biostatistics course to 500 first-year Masters students
+<li>Worked closely with faculty to develop and refine course structure, including material covered, assessment tools, and content development during COVID-19 pandemic pivot to remote/virtual learning
+<li>Manage and mentor team of 20 Teaching Assistants who deliver small group lab practice sessions
+<li>Handle course logistics, from course web platform design and delivery to student issues
 
 ### NYC Department of Health and Mental Hygiene
-HRTP Graduate Research Intern
-<br> Research and Methodology Unit, Bureau of Epidemiology Services
+#### Long Island City, NY
 
-## Publications
+Summer 2020
+<br>Graduate Research Intern, Health Research Training Program
+<br>Summer 2020
+<ul><li>HRTP Intern in the Bureau of Epidemiology Services, Research & Evaluation Unit
+<li>Developed and executed analysis of multiple imputation methods for survey weighting by accuracy and precision in SAS
+<li>Assisted with SAS macro development and improvement for survey weighting for use in Healthy NYC Community Survey
+<ul>
+
+### Virta Health
+#### San Francisco, CA
+
+2017 - 2018
+<br>Senior Patient Success Associate
+<ul><li>Healthcare tech startup using nutrition and a telemedicine-powered continuous care model to reverse Type II diabetes
+<li>Oversaw and facilitated entire patient enrollment to online clinic for 3 clients (10k–50k employees each)
+<li>Designed, planned, and executed processes to improve overall enrollment conversion and median days to enroll
+<li>Maintained relationships with external client contacts, and managed contract partner company work
+<li>Identified system issues and escalated bugs appropriately with supporting data and impact measures (users affected, e.g.)
+<li>Performed regular audits of tools and workflows to ensure data integrity, accuracy, and adoption by teammates
+<li>Shared successful processes with other teams, including unique user tracking and database queries, leading to increased product sustainability, greater tool usability for coworkers, and more effective conversion and retention for onboarded patients
+<li>Implemented a confidential bias incident reporting tool for company’s internal Diversity Group to promote employee safety
+<li>Served on the internal office relocation planning team, assessing needs for diverse team, and securing gender neutral restrooms
+<li>Participated in quarterly company-wide hackathon projects, delivering user-ready final products or concepts within three days
+
+### Jesuit Volunteer Corps
+#### Baltimore, MD
+
+2015-2016
+<br>Program Coordinator, Back on My Feet Baltimore
+<ul><li>Served as individual case manager for residential members recovering from addiction, incarceration, or homelessness
+<li>Facilitated financial literacy, job readiness, resume prep, and goal-setting workshops with corporate partners from community
+<li>Worked with circuit court judicial team and other local non-profit providers on inaugural Veterans’ Diversion Court initiative, allowing veterans with drug-related offenses to receive social service support and treatment instead of incarceration 
+<li>Managed relationships with volunteers, professional partners, and staff at residential housing facilities
+
+### Department of Biology, Santa Clara University
+#### Santa Clara, CA
+
+Spring 2014
+<br> Teaching Assistant, Medical Microbiology
+<ul><li>Assist students in learning basics of microbiological benchwork including aceptic technique and use of a negative-pressure anaerobic chamber
+<li>Work closely with faculty to deliver lab-based instruction and assistance with student projects, including antibacterial testing, environmental sampling, and rectal swab retrieval and analysis
+
+## Skills
+#### Programs, high proficiency: 
+<ul><li>SAS
+<li>Stata
+<li>Microsoft Access
+<li>Salesforce
+<li>Zendesk
+<li>Asana
+<li>Google Apps/Drive
+<li>Microsoft Office Suite
+
+#### Programs, moderate proficiency: 
+<ul><li>R (RStudio)
+<li>SQL (MySQL)
+<li>HTML/CSS
+<li>Google API query language
+<li>Looker data visualization
+
+## Research and Publications
+
+Mielenz TJ, Whalen AM. "The Effects of Self-Care Health Behaviors on Driving Cessation Rates among Aging Drivers: The AAA LongROAD Study." In progress. 
+
+Whalen AM, Wang SM. "An evaluation of imputation methods for survey weighting." Poster. Department of Epidemiology, Columbia University Mailman School of Public Health.
 
 ## Awards and Recognition
+
+Eagle Scout Award, Boy Scouts of America (Awarded: 4/10/2010)
+<br>Dean's Scholarship, Santa Clara University (Awarded: September 2011)
+<br>Keynote Speaker, Ignite Leadership Conference, Center for Student Involvment, Santa Clara University (Awarded: October 2016)
+<br>Dean's Scholarship, Columbia University Mailman School of Public Health (Awarded: September 2019)
