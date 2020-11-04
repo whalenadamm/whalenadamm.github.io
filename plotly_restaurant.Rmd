@@ -41,24 +41,99 @@ rest_inspec %>%
   select(cuisine_description) %>% 
   group_by(cuisine_description) %>% 
   summarize(fqcy = n()) %>% 
-  knitr::kable()
+  filter(fqcy >= 2000) %>% 
+  knitr::kable(
+    col.names = c("Cuisine", "Frequency")
+  )
 ```
 
-Due to the size of the dataset (`r nrow(rest_inspec)` observations), let's just look at restaurants with critical violations in Manhattan. First, an essential cuisine in New York: pizza.
+Due to the size of the dataset (`r nrow(rest_inspec)` observations), let's just look at establishments for cuisines that have over 2000 restaurants in Manhattan. We will also clean up some of the names of cuisines, and drop unnecessary variables for our analysis.
+
+```{r tidy, message = FALSE}
+rest_list = 
+  rest_inspec %>% 
+  filter(boro == "MANHATTAN") %>% 
+  select(cuisine_description) %>% 
+  group_by(cuisine_description) %>% 
+  summarize(fqcy = n()) %>% 
+  filter(fqcy >= 2000) %>% 
+  select(-fqcy)
+
+restaurants_df = 
+  rest_inspec %>% 
+  inner_join(rest_list, by = "cuisine_description") %>% 
+  filter(boro == "MANHATTAN") %>% 
+  mutate(
+    cuisine_description = recode(cuisine_description, 
+           "CafÃ©/Coffee/Tea" = "Cafe",
+           "Latin (Cuban, Dominican, Puerto Rican, South & Central American)" = "Latin")
+  ) %>% 
+  select(-c(camis, building, street, phone, record_date)) %>% 
+  drop_na(score, grade, critical_flag, inspection_type)
+```
 
 ### Pizza Plot
 
-```{r}
+First, an essential cuisine in New York: pizza.
+
+```{r pizza, warning = FALSE}
 pizza_df = 
-  rest_inspec %>% 
+  restaurants_df %>% 
   filter(
-    boro == "MANHATTAN", 
-    critical_flag == "Critical",
     cuisine_description == c("Pizza", "Pizza/Italian")
-  ) %>% 
-  select(-c(camis, phone, record_date, inspection_date))
+  )
 ```
 
+Let's examine the distribution of inspection score (higher score means worse performance) and grade of pizza restaurant. 
 
+```{r pizza_plot, warning = FALSE}
+pizza_plot = 
+  pizza_df %>% 
+  filter(
+    grade %in% c("A", "B", "C"),
+    critical_flag != "Not Applicable"
+  ) %>% 
+  mutate(
+    grade = as.factor(grade),
+    text_label = str_c("Grade: ", grade, "\nScore: ", score)     
+  ) %>% 
+  plot_ly(x = ~grade, y = ~score, color = ~critical_flag, text = ~text_label,
+          type = "box", colors = "viridis", alpha = 0.5,
+          boxpoints = "all", jitter = 0.2, pointpos = -1.8) %>% 
+  layout(boxmode = "group", boxgap = .25, boxgroupgap = 0.5)
 
+pizza_plot
+```
+
+As we expected, a better grade is associated with a score on inspection. There do appear to be a few outliers in the "C" rated category, with a few low severity scores (under 10) still resulted in a poor health grade, and one critical violation with a total 60 points (don't eat there). 
+
+### Restaurant inspection performance by cuisine
+
+Now, for all our selected cuisines, let's investigate which are routinely scored the best, and which often have poor ratings.
+
+```{r cuisine_plot, message = FALSE}
+cuisine_plot = 
+  restaurants_df %>% 
+  filter(
+    grade %in% c("A", "B", "C"),
+    critical_flag != "Not Applicable"
+  ) %>% 
+  group_by(cuisine_description, grade) %>% 
+  summarize(med_score = median(score)) %>% 
+  mutate(text_label = str_c("", cuisine_description, "\nMedian Score: ", med_score, "\nGrade: ", grade)) %>% 
+  plot_ly(
+    x = ~cuisine_description, y = ~med_score, color = ~grade,
+    text = ~text_label, type = "bar", colors = "viridis"
+  ) %>% 
+  layout(xaxis = list(title = "", tickangle = -45), 
+         yaxis = list(title = "Median Score"),
+         bargap = 0.25,
+         legend = list(title = list(text = "Grade")))
+
+cuisine_plot
+```
+
+There doesn't seem to be much variation in median score across A and B ratings; they seem to fall around 10 and 20 points for all cuisines, respectively. However, we do see more variation in median score for C grades. Spanish restaurants tend to have higher scores (again, meaning worse ratings) with a median of 41, the highest for the group; on the other end, sandwich shops tend to have lower median scores at 28 for a C grade. 
+
+### Plot 3
 

@@ -26,6 +26,13 @@
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -418,182 +425,49 @@ rest_inspec %&gt;%
   select(cuisine_description) %&gt;% 
   group_by(cuisine_description) %&gt;% 
   summarize(fqcy = n()) %&gt;% 
-  knitr::kable()</code></pre>
+  filter(fqcy &gt;= 2000) %&gt;% 
+  knitr::kable(
+    col.names = c(&quot;Cuisine&quot;, &quot;Frequency&quot;)
+  )</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">cuisine_description</th>
-<th align="right">fqcy</th>
+<th align="left">Cuisine</th>
+<th align="right">Frequency</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Afghan</td>
-<td align="right">52</td>
-</tr>
-<tr class="even">
-<td align="left">African</td>
-<td align="right">482</td>
-</tr>
 <tr class="odd">
 <td align="left">American</td>
 <td align="right">46462</td>
 </tr>
 <tr class="even">
-<td align="left">Armenian</td>
-<td align="right">214</td>
-</tr>
-<tr class="odd">
 <td align="left">Asian</td>
 <td align="right">2907</td>
 </tr>
-<tr class="even">
-<td align="left">Australian</td>
-<td align="right">166</td>
-</tr>
 <tr class="odd">
-<td align="left">Bagels/Pretzels</td>
-<td align="right">1047</td>
-</tr>
-<tr class="even">
 <td align="left">Bakery</td>
 <td align="right">3441</td>
-</tr>
-<tr class="odd">
-<td align="left">Bangladeshi</td>
-<td align="right">164</td>
-</tr>
-<tr class="even">
-<td align="left">Barbecue</td>
-<td align="right">425</td>
-</tr>
-<tr class="odd">
-<td align="left">Basque</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">Bottled beverages, including water, sodas, juices, etc.</td>
-<td align="right">405</td>
-</tr>
-<tr class="odd">
-<td align="left">Brazilian</td>
-<td align="right">226</td>
 </tr>
 <tr class="even">
 <td align="left">CafÃ©/Coffee/Tea</td>
 <td align="right">8259</td>
 </tr>
 <tr class="odd">
-<td align="left">Californian</td>
-<td align="right">15</td>
-</tr>
-<tr class="even">
-<td align="left">Caribbean</td>
-<td align="right">752</td>
-</tr>
-<tr class="odd">
-<td align="left">Chicken</td>
-<td align="right">1331</td>
-</tr>
-<tr class="even">
-<td align="left">Chilean</td>
-<td align="right">31</td>
-</tr>
-<tr class="odd">
 <td align="left">Chinese</td>
 <td align="right">10893</td>
-</tr>
-<tr class="even">
-<td align="left">Chinese/Cuban</td>
-<td align="right">168</td>
-</tr>
-<tr class="odd">
-<td align="left">Chinese/Japanese</td>
-<td align="right">438</td>
-</tr>
-<tr class="even">
-<td align="left">Continental</td>
-<td align="right">387</td>
-</tr>
-<tr class="odd">
-<td align="left">Creole</td>
-<td align="right">16</td>
 </tr>
 <tr class="even">
 <td align="left">Delicatessen</td>
 <td align="right">2876</td>
 </tr>
 <tr class="odd">
-<td align="left">Donuts</td>
-<td align="right">1519</td>
-</tr>
-<tr class="even">
-<td align="left">Eastern European</td>
-<td align="right">318</td>
-</tr>
-<tr class="odd">
-<td align="left">Egyptian</td>
-<td align="right">47</td>
-</tr>
-<tr class="even">
-<td align="left">English</td>
-<td align="right">195</td>
-</tr>
-<tr class="odd">
-<td align="left">Ethiopian</td>
-<td align="right">222</td>
-</tr>
-<tr class="even">
-<td align="left">Filipino</td>
-<td align="right">100</td>
-</tr>
-<tr class="odd">
 <td align="left">French</td>
 <td align="right">4157</td>
 </tr>
 <tr class="even">
-<td align="left">Fruits/Vegetables</td>
-<td align="right">31</td>
-</tr>
-<tr class="odd">
-<td align="left">German</td>
-<td align="right">284</td>
-</tr>
-<tr class="even">
-<td align="left">Greek</td>
-<td align="right">780</td>
-</tr>
-<tr class="odd">
-<td align="left">Hamburgers</td>
-<td align="right">1830</td>
-</tr>
-<tr class="even">
-<td align="left">Hawaiian</td>
-<td align="right">101</td>
-</tr>
-<tr class="odd">
-<td align="left">Hotdogs</td>
-<td align="right">138</td>
-</tr>
-<tr class="even">
-<td align="left">Hotdogs/Pretzels</td>
-<td align="right">81</td>
-</tr>
-<tr class="odd">
-<td align="left">Ice Cream, Gelato, Yogurt, Ices</td>
-<td align="right">990</td>
-</tr>
-<tr class="even">
 <td align="left">Indian</td>
 <td align="right">2850</td>
-</tr>
-<tr class="odd">
-<td align="left">Indonesian</td>
-<td align="right">46</td>
-</tr>
-<tr class="even">
-<td align="left">Iranian</td>
-<td align="right">39</td>
 </tr>
 <tr class="odd">
 <td align="left">Irish</td>
@@ -608,60 +482,12 @@ rest_inspec %&gt;%
 <td align="right">8324</td>
 </tr>
 <tr class="even">
-<td align="left">Jewish/Kosher</td>
-<td align="right">1187</td>
-</tr>
-<tr class="odd">
-<td align="left">Juice, Smoothies, Fruit Salads</td>
-<td align="right">1361</td>
-</tr>
-<tr class="even">
-<td align="left">Korean</td>
-<td align="right">1764</td>
-</tr>
-<tr class="odd">
 <td align="left">Latin (Cuban, Dominican, Puerto Rican, South &amp; Central American)</td>
 <td align="right">4177</td>
-</tr>
-<tr class="even">
-<td align="left">Mediterranean</td>
-<td align="right">1960</td>
 </tr>
 <tr class="odd">
 <td align="left">Mexican</td>
 <td align="right">5138</td>
-</tr>
-<tr class="even">
-<td align="left">Middle Eastern</td>
-<td align="right">810</td>
-</tr>
-<tr class="odd">
-<td align="left">Moroccan</td>
-<td align="right">235</td>
-</tr>
-<tr class="even">
-<td align="left">Not Listed/Not Applicable</td>
-<td align="right">11</td>
-</tr>
-<tr class="odd">
-<td align="left">Nuts/Confectionary</td>
-<td align="right">34</td>
-</tr>
-<tr class="even">
-<td align="left">Other</td>
-<td align="right">797</td>
-</tr>
-<tr class="odd">
-<td align="left">Pakistani</td>
-<td align="right">113</td>
-</tr>
-<tr class="even">
-<td align="left">Pancakes/Waffles</td>
-<td align="right">36</td>
-</tr>
-<tr class="odd">
-<td align="left">Peruvian</td>
-<td align="right">258</td>
 </tr>
 <tr class="even">
 <td align="left">Pizza</td>
@@ -672,103 +498,98 @@ rest_inspec %&gt;%
 <td align="right">2269</td>
 </tr>
 <tr class="even">
-<td align="left">Polish</td>
-<td align="right">73</td>
-</tr>
-<tr class="odd">
-<td align="left">Polynesian</td>
-<td align="right">37</td>
-</tr>
-<tr class="even">
-<td align="left">Portuguese</td>
-<td align="right">45</td>
-</tr>
-<tr class="odd">
-<td align="left">Russian</td>
-<td align="right">226</td>
-</tr>
-<tr class="even">
-<td align="left">Salads</td>
-<td align="right">593</td>
-</tr>
-<tr class="odd">
 <td align="left">Sandwiches</td>
 <td align="right">2130</td>
-</tr>
-<tr class="even">
-<td align="left">Sandwiches/Salads/Mixed Buffet</td>
-<td align="right">1678</td>
-</tr>
-<tr class="odd">
-<td align="left">Scandinavian</td>
-<td align="right">56</td>
-</tr>
-<tr class="even">
-<td align="left">Seafood</td>
-<td align="right">1283</td>
-</tr>
-<tr class="odd">
-<td align="left">Soul Food</td>
-<td align="right">415</td>
-</tr>
-<tr class="even">
-<td align="left">Soups</td>
-<td align="right">19</td>
-</tr>
-<tr class="odd">
-<td align="left">Soups &amp; Sandwiches</td>
-<td align="right">432</td>
-</tr>
-<tr class="even">
-<td align="left">Southwestern</td>
-<td align="right">40</td>
 </tr>
 <tr class="odd">
 <td align="left">Spanish</td>
 <td align="right">2413</td>
 </tr>
 <tr class="even">
-<td align="left">Steak</td>
-<td align="right">807</td>
-</tr>
-<tr class="odd">
-<td align="left">Tapas</td>
-<td align="right">418</td>
-</tr>
-<tr class="even">
-<td align="left">Tex-Mex</td>
-<td align="right">814</td>
-</tr>
-<tr class="odd">
 <td align="left">Thai</td>
 <td align="right">2873</td>
 </tr>
-<tr class="even">
-<td align="left">Turkish</td>
-<td align="right">641</td>
-</tr>
-<tr class="odd">
-<td align="left">Vegetarian</td>
-<td align="right">896</td>
-</tr>
-<tr class="even">
-<td align="left">Vietnamese/Cambodian/Malaysia</td>
-<td align="right">766</td>
-</tr>
 </tbody>
 </table>
-<p>Due to the size of the dataset (397584 observations), let’s just look at restaurants with critical violations in Manhattan. First, an essential cuisine in New York: pizza.</p>
+<p>Due to the size of the dataset (397584 observations), let’s just look at establishments for cuisines that have over 2000 restaurants in Manhattan. We will also clean up some of the names of cuisines, and drop unnecessary variables for our analysis.</p>
+<pre class="r"><code>rest_list = 
+  rest_inspec %&gt;% 
+  filter(boro == &quot;MANHATTAN&quot;) %&gt;% 
+  select(cuisine_description) %&gt;% 
+  group_by(cuisine_description) %&gt;% 
+  summarize(fqcy = n()) %&gt;% 
+  filter(fqcy &gt;= 2000) %&gt;% 
+  select(-fqcy)
+
+restaurants_df = 
+  rest_inspec %&gt;% 
+  inner_join(rest_list, by = &quot;cuisine_description&quot;) %&gt;% 
+  filter(boro == &quot;MANHATTAN&quot;) %&gt;% 
+  mutate(
+    cuisine_description = recode(cuisine_description, 
+           &quot;CafÃ©/Coffee/Tea&quot; = &quot;Cafe&quot;,
+           &quot;Latin (Cuban, Dominican, Puerto Rican, South &amp; Central American)&quot; = &quot;Latin&quot;)
+  ) %&gt;% 
+  select(-c(camis, building, street, phone, record_date)) %&gt;% 
+  drop_na(score, grade, critical_flag, inspection_type)</code></pre>
 </div>
 <div id="pizza-plot" class="section level3">
 <h3>Pizza Plot</h3>
+<p>First, an essential cuisine in New York: pizza.</p>
 <pre class="r"><code>pizza_df = 
-  rest_inspec %&gt;% 
+  restaurants_df %&gt;% 
   filter(
-    boro == &quot;MANHATTAN&quot;, 
-    critical_flag == &quot;Critical&quot;,
     cuisine_description == c(&quot;Pizza&quot;, &quot;Pizza/Italian&quot;)
+  )</code></pre>
+<p>Let’s examine the distribution of inspection score (higher score means worse performance) and grade of pizza restaurant.</p>
+<pre class="r"><code>pizza_plot = 
+  pizza_df %&gt;% 
+  filter(
+    grade %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+    critical_flag != &quot;Not Applicable&quot;
   ) %&gt;% 
-  select(-c(camis, phone, record_date, inspection_date))</code></pre>
+  mutate(
+    grade = as.factor(grade),
+    text_label = str_c(&quot;Grade: &quot;, grade, &quot;\nScore: &quot;, score)     
+  ) %&gt;% 
+  plot_ly(x = ~grade, y = ~score, color = ~critical_flag, text = ~text_label,
+          type = &quot;box&quot;, colors = &quot;viridis&quot;, alpha = 0.5,
+          boxpoints = &quot;all&quot;, jitter = 0.2, pointpos = -1.8) %&gt;% 
+  layout(boxmode = &quot;group&quot;, boxgap = .25, boxgroupgap = 0.5)
+
+pizza_plot</code></pre>
+<div id="htmlwidget-0b1bf35f0f4c634bcca4" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0b1bf35f0f4c634bcca4">{"x":{"visdat":{"53c51aa912c6":["function () ","plotlyVisDat"]},"cur_data":"53c51aa912c6","attrs":{"53c51aa912c6":{"x":{},"y":{},"text":{},"boxpoints":"all","jitter":0.2,"pointpos":-1.8,"color":{},"colors":"viridis","alpha":0.5,"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"boxmode":"group","boxgap":0.25,"boxgroupgap":0.5,"xaxis":{"domain":[0,1],"automargin":true,"title":"grade","type":"category","categoryorder":"array","categoryarray":["A","B","C"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"score"},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(68,1,84,0.5)","x":["A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","C","A","B","A","A","A","A","A","C","A","B","A","A","A","B","A","B","A","A","B","B","A","B","A","A","B","C","A","A","A","A","B","B","B","B","A","C","B","A","A","A","B","A","A","A","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","B","A","A","A","A","B","A","A","A","A","A","A","B","B","A","B","A","A","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","B","A","A","B","A","B","A","B","A","A","A","A","A","B","A","A","A","A","A","B","A","A","A","A","A","B","A","A","A","B","A","A","A","B","B","B","B","A","A","A","A","B","B","B","A","B","B","A","A","B","B","B","A","A","B","B","A","A","A","B","A","B","A","B","B","A","A","B","A","A","A","A","A","B","B","A","A","B","A","A","A","A","B","B","A","A","A","A","A","B","A","A","B","A","B","B","A","A","A","A","A","A","B","A","A","A","A","A","A","B","A","A","A","A","A","A","B","B","A","B","A","A","A","A","A","A","A","A","A","A","B","A","C","B","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","B","A","B","A","B","A","A","A","A","A","A","B","B","A","B","A","A","B","A","A","A","A","A","A","B","B","A","A","B","B","B","A","A","C","C","A","A","C","A","A","B","C","B","C","A","A","A","C","B","A","B","A","B","B","B","A","B","A","A","A","A","C","A","B","A","B","A","C","A","C","A","A","B","A","A","C","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","C","A","A","B","A","A","A","A","C","A","A","A","A","A","A","A","A","B","A","A","A","C","A","A","B","A","A","A","B","A","B","B","B","A","A","A","B","B","A","B","A","A","A","A","B","A","A","B","A","A","A","B","A","A","A","A","B","A","A","A","A","A","B","A","A","A","A","A","A","B","A","A","A","A","B","A","A","A","B","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","B","A","A","A","B","A","B","A","A","A","B","A","B","A","A","B","A","A","A","A","A","A","A","A","B","B","A","A","A","A","A","A","C","A","A","B","A","A","C","A","A","C","A","B","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","B","A","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","A","C","B","A","B","B","A","A","A","B","A","A","B","A","B","A","A","C","A","A","A","B","C","A","A","A","B","A","B","A","B","B","A","A","A","A","A","A","B","A","B","A","A","A","A","A","C","A","A","B","B","C","A","A","A","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","B","B","A","C","A","A","C","A","A","A","A","B","A","B","A","A","A","B","A","A","A","A","C","B","A","A","A","A","A","A","A","B","A","A","A","A","B","A","B","B","A","A","C","A","A","A","A","B","C","C","A","B","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","C","A","A","A","A","B","A","A","B","A","B","B","A","A","A","A","B","A","A","A","A","A","C","A","A","C","A","A","A","A","A","A","A","A","A","A","B","A","B","A","A","A","A","A","B","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","B","A","C","B","B","A","B","B","A","A","A","A","A","C","A","B","A","B","A","A","A","B","A","C","C","A","C","A","C","A","A","C","A","B","C","C","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","B","A","A","A","B","A","A","A","A","A","A","A","A","A"],"y":[11,11,5,10,11,11,9,9,9,13,9,12,12,7,11,7,9,10,12,10,13,7,12,13,13,20,9,9,11,8,13,9,11,20,7,7,8,7,10,10,13,13,12,9,9,10,7,48,7,23,9,9,9,13,12,48,12,21,12,10,12,19,9,16,9,8,19,15,12,17,9,13,26,48,10,12,5,13,26,15,21,21,13,48,27,8,12,12,15,10,9,5,9,7,10,27,15,12,12,12,9,12,8,12,12,9,10,9,12,16,7,10,10,13,10,10,12,12,7,9,12,5,11,13,12,13,5,11,5,12,5,11,14,12,18,13,13,12,11,27,12,13,12,8,12,12,14,14,5,16,8,8,17,17,10,12,10,13,13,10,12,10,9,12,6,7,11,13,9,13,12,15,7,17,12,13,17,13,27,13,15,13,13,7,13,9,18,9,10,11,11,5,20,13,12,12,7,11,24,11,5,11,20,13,7,13,15,19,24,24,13,13,13,13,24,24,24,13,26,26,10,7,27,26,15,9,13,18,18,10,13,13,15,11,24,12,24,16,8,11,15,13,12,12,13,12,27,15,12,13,24,9,10,12,8,24,24,7,12,11,12,13,27,10,9,27,10,24,20,10,11,8,13,7,7,21,12,12,7,12,11,12,26,5,12,13,13,10,13,26,20,10,21,9,12,10,12,12,7,5,13,9,12,20,10,40,23,11,13,12,13,7,11,12,13,12,12,20,12,9,11,12,9,16,12,19,8,14,13,13,7,7,12,13,15,19,9,14,9,9,23,12,12,13,13,12,10,26,26,13,5,19,23,27,12,13,38,45,10,12,38,13,9,22,53,27,29,10,11,12,38,21,12,23,11,26,26,17,13,15,12,12,12,13,30,10,26,12,21,12,30,13,29,9,9,23,12,11,45,9,11,12,9,12,5,13,12,12,13,26,11,13,9,11,8,12,12,32,13,11,17,13,12,12,11,34,12,9,13,12,8,12,5,12,21,9,12,11,34,10,13,21,9,13,11,18,7,18,18,15,13,5,13,14,23,12,20,10,5,11,12,23,13,11,20,13,9,9,17,9,12,10,13,17,9,12,5,13,7,20,13,9,12,5,7,10,15,11,12,10,12,14,12,13,7,18,8,9,8,20,15,12,10,12,12,7,10,12,10,9,5,12,12,10,12,12,12,12,15,15,10,8,9,7,8,19,8,13,10,11,12,13,11,13,8,13,13,11,25,10,13,20,13,12,7,22,13,22,5,11,13,20,8,22,12,13,25,11,10,12,12,13,12,12,12,27,19,10,12,13,10,10,10,33,10,12,18,11,11,29,13,12,33,9,15,10,9,12,12,8,11,10,15,8,10,10,10,7,7,12,7,18,10,11,13,12,5,35,10,10,12,10,12,12,10,13,9,7,10,7,12,13,7,13,10,11,11,10,12,13,12,9,12,13,12,10,17,12,9,11,18,12,12,12,9,10,10,60,17,13,21,21,12,11,9,16,11,12,21,12,16,10,5,60,7,13,10,14,60,12,13,7,18,11,18,10,18,25,12,10,10,5,7,12,21,12,14,12,13,12,7,12,34,9,13,25,21,34,13,12,11,11,11,11,21,21,13,12,6,5,7,13,12,10,12,13,19,19,12,29,13,12,29,9,10,10,12,26,10,17,13,13,7,26,9,13,10,5,29,15,13,9,12,9,12,12,9,14,9,10,12,9,19,5,22,19,7,13,29,8,7,10,12,14,29,29,10,21,13,13,12,10,11,12,21,10,11,10,11,10,13,13,11,7,12,10,10,11,13,10,7,12,32,7,12,13,7,25,11,10,24,13,25,20,7,10,13,13,20,7,9,5,10,10,7,9,11,35,7,9,7,10,12,10,8,12,9,10,21,10,15,9,10,12,7,8,15,12,13,7,17,23,10,13,9,10,11,12,8,13,10,10,12,8,9,12,12,24,13,24,8,29,27,18,10,24,17,9,12,10,9,12,29,12,18,10,27,13,12,10,17,13,51,36,11,36,8,36,12,10,36,12,25,36,36,36,10,5,13,7,9,10,12,7,12,10,12,10,12,10,7,10,19,13,13,10,15,12,9,20,13,12,11,15,11,10,12,12,13,12,12,8,9],"text":["Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: B<br />Score: 20","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: C<br />Score: 48","Grade: A<br />Score: 7","Grade: B<br />Score: 23","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: C<br />Score: 48","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 19","Grade: A<br />Score: 9","Grade: B<br />Score: 16","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: B<br />Score: 19","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: B<br />Score: 26","Grade: C<br />Score: 48","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: B<br />Score: 26","Grade: B<br />Score: 15","Grade: B<br />Score: 21","Grade: B<br />Score: 21","Grade: A<br />Score: 13","Grade: C<br />Score: 48","Grade: B<br />Score: 27","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 5","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: B<br />Score: 27","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 16","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: B<br />Score: 18","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: B<br />Score: 27","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 14","Grade: B<br />Score: 14","Grade: A<br />Score: 5","Grade: B<br />Score: 16","Grade: A<br />Score: 8","Grade: A<br />Score: 8","Grade: B<br />Score: 17","Grade: B<br />Score: 17","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 6","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: A<br />Score: 7","Grade: B<br />Score: 17","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: B<br />Score: 27","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: B<br />Score: 18","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: B<br />Score: 24","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: B<br />Score: 19","Grade: B<br />Score: 24","Grade: B<br />Score: 24","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 24","Grade: B<br />Score: 24","Grade: B<br />Score: 24","Grade: A<br />Score: 13","Grade: B<br />Score: 26","Grade: B<br />Score: 26","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: B<br />Score: 27","Grade: B<br />Score: 26","Grade: B<br />Score: 15","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: B<br />Score: 18","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: A<br />Score: 11","Grade: B<br />Score: 24","Grade: A<br />Score: 12","Grade: B<br />Score: 24","Grade: B<br />Score: 16","Grade: A<br />Score: 8","Grade: A<br />Score: 11","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: B<br />Score: 27","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 24","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: B<br />Score: 24","Grade: B<br />Score: 24","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 27","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: B<br />Score: 27","Grade: A<br />Score: 10","Grade: B<br />Score: 24","Grade: B<br />Score: 20","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 26","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: B<br />Score: 26","Grade: B<br />Score: 20","Grade: A<br />Score: 10","Grade: B<br />Score: 21","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 20","Grade: A<br />Score: 10","Grade: C<br />Score: 40","Grade: B<br />Score: 23","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 20","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: B<br />Score: 16","Grade: A<br />Score: 12","Grade: B<br />Score: 19","Grade: A<br />Score: 8","Grade: B<br />Score: 14","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: B<br />Score: 19","Grade: A<br />Score: 9","Grade: B<br />Score: 14","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: B<br />Score: 23","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: B<br />Score: 26","Grade: B<br />Score: 26","Grade: A<br />Score: 13","Grade: A<br />Score: 5","Grade: B<br />Score: 19","Grade: B<br />Score: 23","Grade: B<br />Score: 27","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: C<br />Score: 38","Grade: C<br />Score: 45","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: C<br />Score: 38","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: B<br />Score: 22","Grade: C<br />Score: 53","Grade: B<br />Score: 27","Grade: C<br />Score: 29","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: C<br />Score: 38","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: B<br />Score: 23","Grade: A<br />Score: 11","Grade: B<br />Score: 26","Grade: B<br />Score: 26","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: C<br />Score: 30","Grade: A<br />Score: 10","Grade: B<br />Score: 26","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: C<br />Score: 30","Grade: A<br />Score: 13","Grade: C<br />Score: 29","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: B<br />Score: 23","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: C<br />Score: 45","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 26","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: C<br />Score: 32","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: C<br />Score: 34","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: C<br />Score: 34","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: B<br />Score: 21","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: B<br />Score: 18","Grade: A<br />Score: 7","Grade: B<br />Score: 18","Grade: B<br />Score: 18","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: B<br />Score: 14","Grade: B<br />Score: 23","Grade: A<br />Score: 12","Grade: B<br />Score: 20","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 23","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: B<br />Score: 15","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 18","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: B<br />Score: 20","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: B<br />Score: 15","Grade: A<br />Score: 10","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: B<br />Score: 19","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: B<br />Score: 25","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: B<br />Score: 22","Grade: A<br />Score: 13","Grade: B<br />Score: 22","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: A<br />Score: 8","Grade: B<br />Score: 22","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 25","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 27","Grade: B<br />Score: 19","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: C<br />Score: 33","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 18","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: C<br />Score: 29","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: C<br />Score: 33","Grade: A<br />Score: 9","Grade: B<br />Score: 15","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: B<br />Score: 15","Grade: A<br />Score: 8","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: C<br />Score: 35","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: B<br />Score: 17","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: B<br />Score: 18","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: C<br />Score: 60","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: B<br />Score: 21","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: B<br />Score: 16","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: B<br />Score: 16","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: C<br />Score: 60","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 14","Grade: C<br />Score: 60","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 18","Grade: A<br />Score: 11","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: B<br />Score: 18","Grade: B<br />Score: 25","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 12","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: C<br />Score: 34","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: B<br />Score: 25","Grade: B<br />Score: 21","Grade: C<br />Score: 34","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: B<br />Score: 21","Grade: B<br />Score: 21","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 6","Grade: A<br />Score: 5","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 19","Grade: B<br />Score: 19","Grade: A<br />Score: 12","Grade: C<br />Score: 29","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: C<br />Score: 29","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 26","Grade: A<br />Score: 10","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 26","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: C<br />Score: 29","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: B<br />Score: 14","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: B<br />Score: 19","Grade: A<br />Score: 5","Grade: B<br />Score: 22","Grade: B<br />Score: 19","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: C<br />Score: 29","Grade: A<br />Score: 8","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 14","Grade: C<br />Score: 29","Grade: C<br />Score: 29","Grade: A<br />Score: 10","Grade: B<br />Score: 21","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: C<br />Score: 32","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 25","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: B<br />Score: 24","Grade: A<br />Score: 13","Grade: B<br />Score: 25","Grade: B<br />Score: 20","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 5","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: C<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: C<br />Score: 35","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: B<br />Score: 21","Grade: A<br />Score: 10","Grade: B<br />Score: 15","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 17","Grade: B<br />Score: 23","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 24","Grade: A<br />Score: 13","Grade: B<br />Score: 24","Grade: A<br />Score: 8","Grade: C<br />Score: 29","Grade: B<br />Score: 27","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: B<br />Score: 24","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: C<br />Score: 29","Grade: A<br />Score: 12","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: B<br />Score: 27","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: C<br />Score: 51","Grade: C<br />Score: 36","Grade: A<br />Score: 11","Grade: C<br />Score: 36","Grade: A<br />Score: 8","Grade: C<br />Score: 36","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: C<br />Score: 36","Grade: A<br />Score: 12","Grade: B<br />Score: 25","Grade: C<br />Score: 36","Grade: C<br />Score: 36","Grade: C<br />Score: 36","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: B<br />Score: 19","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 15","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: B<br />Score: 15","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 9"],"boxpoints":"all","jitter":0.2,"pointpos":-1.8,"type":"box","name":"Critical","marker":{"color":"rgba(68,1,84,0.5)","line":{"color":"rgba(68,1,84,1)"}},"line":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(253,231,37,0.5)","x":["A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","B","A","A","A","A","A","A","A","A","A","B","B","A","A","A","A","A","A","C","B","A","B","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","B","A","A","A","A","B","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","B","B","A","B","A","A","C","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","B","B","A","A","B","A","A","B","A","A","A","A","A","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","B","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","B","A","A","B","A","A","B","A","A","B","A","A","A","A","A","A","B","A","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","A","C","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","B","B","A","A","A","A","A","A","A","A","B","A","B","A","A","A","B","A","B","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","B","A","A","A","A","B","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","B","B","A","A","A","B","A","A","A","A","A","A","B","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","B","A","A","A","A","A","B","A","A","A","A","A","C","B","A","A","A","A","A","B","A","A","A","A","A","B","A","A","A","A","A","A","C","A","A","A","A","A","A","A","A","A","A","A","C","A","A","A","B","A","A","A","A","A","A","A","B","A","A","A","A","A","A","C","A","A","A","B","B","C","A","A","A","A","A","A","A","A","A","B","B","A","A","A","B","B","B","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","C","A","A","A","B","A","A","A","A","A","A","A","A","A","A","B","A","A","A","A","A","A","A","A","A","A","A","A","A","B","A","A","A","B","A","A","A","A","A","A","A","A","A","A","C","B","A","A","A","A","A","A","A","A","A"],"y":[9,20,9,13,12,13,7,10,12,10,13,2,11,7,10,7,9,12,8,5,6,9,8,9,3,9,12,9,12,11,5,13,6,11,10,7,11,5,9,8,7,9,20,13,13,10,2,9,13,9,5,12,9,11,9,9,13,4,4,12,12,7,7,3,9,26,2,15,4,13,13,10,9,13,11,9,12,23,16,5,2,4,9,10,13,48,19,13,23,13,11,12,5,9,9,11,12,12,13,22,10,10,13,11,12,12,7,8,8,12,9,7,10,12,11,10,11,12,13,8,19,13,12,2,3,2,9,12,11,2,11,12,11,13,11,9,16,9,7,9,10,19,11,13,9,13,11,12,13,11,10,11,12,10,10,11,8,8,9,10,12,13,10,12,14,9,9,12,10,2,9,10,10,7,4,4,3,13,10,27,10,13,17,5,12,9,8,18,12,11,10,12,3,10,5,18,11,7,7,11,10,11,12,3,24,27,2,26,13,9,2,11,2,7,12,7,12,12,15,13,2,13,5,9,3,9,11,27,15,13,4,27,12,2,24,9,12,13,12,12,4,11,12,20,26,12,4,7,11,12,10,11,11,7,8,13,10,7,21,11,3,11,12,11,12,7,21,40,11,11,13,13,11,9,13,12,12,11,10,10,11,12,7,2,16,19,7,13,12,11,10,13,13,9,13,7,14,12,12,10,11,9,26,11,13,13,15,5,12,12,12,13,13,10,25,3,10,12,11,5,13,12,25,13,11,21,10,11,25,12,9,17,7,12,12,13,11,4,27,2,12,11,4,12,45,10,9,12,4,11,10,9,13,10,9,11,11,32,13,12,3,11,32,13,11,2,2,10,12,3,4,2,11,2,12,13,12,9,12,4,12,2,12,12,11,13,2,11,10,9,13,12,11,4,9,2,9,12,17,11,2,7,12,15,23,11,2,11,11,12,10,10,11,18,13,20,7,9,12,17,13,15,9,10,11,8,17,9,2,8,4,10,11,12,6,10,2,12,2,4,4,9,10,11,6,12,7,3,4,11,15,9,13,12,13,13,4,13,4,12,12,15,11,10,11,15,13,13,11,3,8,11,19,12,7,9,13,12,12,3,9,20,11,2,9,9,8,11,4,5,13,13,13,7,13,2,25,20,22,13,8,12,12,10,2,12,2,12,9,11,12,10,25,10,11,7,11,4,10,12,10,11,15,10,5,11,7,10,12,10,12,8,11,11,12,11,33,12,10,7,9,2,7,4,7,10,4,4,8,7,7,8,6,2,8,35,6,13,12,8,12,9,20,10,9,4,9,12,11,4,11,13,13,17,4,9,11,27,11,10,18,10,12,12,11,19,7,7,12,2,10,11,9,11,13,17,11,10,4,17,9,12,12,11,10,18,18,13,13,12,21,13,11,12,4,13,13,14,12,25,9,13,9,6,12,13,9,12,9,13,10,11,9,11,10,7,9,10,7,9,7,10,19,2,23,7,12,5,9,10,15,3,9,12,8,10,29,14,13,10,7,11,5,22,9,12,12,9,7,14,12,12,9,12,13,12,29,13,13,9,10,8,7,13,11,2,13,10,35,11,2,13,24,12,10,13,9,13,7,10,17,10,10,12,4,10,7,7,10,12,13,20,20,35,9,11,5,4,13,6,7,8,9,21,21,10,10,2,17,23,17,9,10,10,12,12,7,9,12,11,13,13,9,9,2,4,13,13,10,27,12,12,13,6,29,12,9,12,17,8,13,9,12,10,11,13,9,13,10,17,12,9,5,13,11,12,6,2,6,2,2,7,11,27,11,11,12,19,13,10,3,13,11,7,8,12,7,13,40,19,2,10,9,12,13,8,12,2,9],"text":["Grade: A<br />Score: 9","Grade: B<br />Score: 20","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 5","Grade: A<br />Score: 6","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: A<br />Score: 3","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 6","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: B<br />Score: 20","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 2","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 4","Grade: A<br />Score: 4","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 3","Grade: A<br />Score: 9","Grade: B<br />Score: 26","Grade: A<br />Score: 2","Grade: B<br />Score: 15","Grade: A<br />Score: 4","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 23","Grade: B<br />Score: 16","Grade: A<br />Score: 5","Grade: A<br />Score: 2","Grade: A<br />Score: 4","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: C<br />Score: 48","Grade: B<br />Score: 19","Grade: A<br />Score: 13","Grade: B<br />Score: 23","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 22","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 8","Grade: B<br />Score: 19","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 3","Grade: A<br />Score: 2","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: B<br />Score: 16","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: B<br />Score: 19","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 8","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: B<br />Score: 14","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 2","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 4","Grade: A<br />Score: 4","Grade: A<br />Score: 3","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 27","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: B<br />Score: 17","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: B<br />Score: 18","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 3","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: B<br />Score: 18","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 3","Grade: B<br />Score: 24","Grade: B<br />Score: 27","Grade: A<br />Score: 2","Grade: B<br />Score: 26","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: C<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 2","Grade: A<br />Score: 13","Grade: A<br />Score: 5","Grade: A<br />Score: 9","Grade: A<br />Score: 3","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: B<br />Score: 27","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 4","Grade: B<br />Score: 27","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: B<br />Score: 24","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 20","Grade: B<br />Score: 26","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: B<br />Score: 21","Grade: A<br />Score: 11","Grade: A<br />Score: 3","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: B<br />Score: 21","Grade: C<br />Score: 40","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 2","Grade: B<br />Score: 16","Grade: B<br />Score: 19","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: B<br />Score: 26","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: A<br />Score: 5","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 25","Grade: A<br />Score: 3","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: B<br />Score: 25","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: B<br />Score: 21","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: B<br />Score: 25","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: B<br />Score: 17","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: B<br />Score: 27","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: A<br />Score: 12","Grade: C<br />Score: 45","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: C<br />Score: 32","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 3","Grade: A<br />Score: 11","Grade: C<br />Score: 32","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 2","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 3","Grade: A<br />Score: 4","Grade: A<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: A<br />Score: 9","Grade: A<br />Score: 2","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 17","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: B<br />Score: 23","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: B<br />Score: 18","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 17","Grade: A<br />Score: 13","Grade: B<br />Score: 15","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 8","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 2","Grade: A<br />Score: 8","Grade: A<br />Score: 4","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 6","Grade: A<br />Score: 10","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 4","Grade: A<br />Score: 4","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 6","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 3","Grade: A<br />Score: 4","Grade: A<br />Score: 11","Grade: B<br />Score: 15","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 4","Grade: A<br />Score: 13","Grade: A<br />Score: 4","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: B<br />Score: 15","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: B<br />Score: 15","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 3","Grade: A<br />Score: 8","Grade: A<br />Score: 11","Grade: B<br />Score: 19","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 3","Grade: A<br />Score: 9","Grade: B<br />Score: 20","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 8","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 2","Grade: B<br />Score: 25","Grade: B<br />Score: 20","Grade: B<br />Score: 22","Grade: A<br />Score: 13","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: B<br />Score: 25","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: B<br />Score: 15","Grade: A<br />Score: 10","Grade: A<br />Score: 5","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: C<br />Score: 33","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 2","Grade: A<br />Score: 7","Grade: A<br />Score: 4","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 4","Grade: A<br />Score: 4","Grade: A<br />Score: 8","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 6","Grade: A<br />Score: 2","Grade: A<br />Score: 8","Grade: C<br />Score: 35","Grade: A<br />Score: 6","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 20","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 4","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 4","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 17","Grade: A<br />Score: 4","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: B<br />Score: 27","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: B<br />Score: 18","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: B<br />Score: 19","Grade: A<br />Score: 7","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: B<br />Score: 17","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 4","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: B<br />Score: 18","Grade: B<br />Score: 18","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: B<br />Score: 21","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: B<br />Score: 25","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 6","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: B<br />Score: 19","Grade: A<br />Score: 2","Grade: B<br />Score: 23","Grade: A<br />Score: 7","Grade: A<br />Score: 12","Grade: A<br />Score: 5","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: B<br />Score: 15","Grade: A<br />Score: 3","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 8","Grade: A<br />Score: 10","Grade: C<br />Score: 29","Grade: B<br />Score: 14","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: B<br />Score: 22","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 7","Grade: B<br />Score: 14","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 12","Grade: C<br />Score: 29","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 8","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: C<br />Score: 35","Grade: A<br />Score: 11","Grade: A<br />Score: 2","Grade: A<br />Score: 13","Grade: B<br />Score: 24","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 7","Grade: A<br />Score: 10","Grade: B<br />Score: 17","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 4","Grade: A<br />Score: 10","Grade: A<br />Score: 7","Grade: C<br />Score: 7","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: B<br />Score: 20","Grade: B<br />Score: 20","Grade: C<br />Score: 35","Grade: A<br />Score: 9","Grade: A<br />Score: 11","Grade: A<br />Score: 5","Grade: A<br />Score: 4","Grade: A<br />Score: 13","Grade: A<br />Score: 6","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 9","Grade: B<br />Score: 21","Grade: B<br />Score: 21","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 2","Grade: B<br />Score: 17","Grade: B<br />Score: 23","Grade: B<br />Score: 17","Grade: A<br />Score: 9","Grade: A<br />Score: 10","Grade: A<br />Score: 10","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 9","Grade: A<br />Score: 2","Grade: A<br />Score: 4","Grade: A<br />Score: 13","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 27","Grade: A<br />Score: 12","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 6","Grade: C<br />Score: 29","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: B<br />Score: 17","Grade: A<br />Score: 8","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 10","Grade: A<br />Score: 11","Grade: A<br />Score: 13","Grade: A<br />Score: 9","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: B<br />Score: 17","Grade: A<br />Score: 12","Grade: A<br />Score: 9","Grade: A<br />Score: 5","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: A<br />Score: 6","Grade: A<br />Score: 2","Grade: A<br />Score: 6","Grade: A<br />Score: 2","Grade: A<br />Score: 2","Grade: A<br />Score: 7","Grade: A<br />Score: 11","Grade: B<br />Score: 27","Grade: A<br />Score: 11","Grade: A<br />Score: 11","Grade: A<br />Score: 12","Grade: B<br />Score: 19","Grade: A<br />Score: 13","Grade: A<br />Score: 10","Grade: A<br />Score: 3","Grade: A<br />Score: 13","Grade: A<br />Score: 11","Grade: A<br />Score: 7","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 7","Grade: A<br />Score: 13","Grade: C<br />Score: 40","Grade: B<br />Score: 19","Grade: A<br />Score: 2","Grade: A<br />Score: 10","Grade: A<br />Score: 9","Grade: A<br />Score: 12","Grade: A<br />Score: 13","Grade: A<br />Score: 8","Grade: A<br />Score: 12","Grade: A<br />Score: 2","Grade: A<br />Score: 9"],"boxpoints":"all","jitter":0.2,"pointpos":-1.8,"type":"box","name":"Not Critical","marker":{"color":"rgba(253,231,37,0.5)","line":{"color":"rgba(253,231,37,1)"}},"line":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>As we expected, a better grade is associated with a score on inspection. There do appear to be a few outliers in the “C” rated category, with a few low severity scores (under 10) still resulted in a poor health grade, and one critical violation with a total 60 points (don’t eat there).</p>
+</div>
+<div id="restaurant-inspection-performance-by-cuisine" class="section level3">
+<h3>Restaurant inspection performance by cuisine</h3>
+<p>Now, for all our selected cuisines, let’s investigate which are routinely scored the best, and which often have poor ratings.</p>
+<pre class="r"><code>cuisine_plot = 
+  restaurants_df %&gt;% 
+  filter(
+    grade %in% c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;),
+    critical_flag != &quot;Not Applicable&quot;
+  ) %&gt;% 
+  group_by(cuisine_description, grade) %&gt;% 
+  summarize(med_score = median(score)) %&gt;% 
+  mutate(text_label = str_c(&quot;&quot;, cuisine_description, &quot;\nMedian Score: &quot;, med_score, &quot;\nGrade: &quot;, grade)) %&gt;% 
+  plot_ly(
+    x = ~cuisine_description, y = ~med_score, color = ~grade,
+    text = ~text_label, type = &quot;bar&quot;, colors = &quot;viridis&quot;
+  ) %&gt;% 
+  layout(xaxis = list(title = &quot;&quot;, tickangle = -45), 
+         yaxis = list(title = &quot;Median Score&quot;),
+         bargap = 0.25,
+         legend = list(title = list(text = &quot;Grade&quot;)))
+
+cuisine_plot</code></pre>
+<div id="htmlwidget-71c16dc8d6155ab2238e" style="width:90%;height:345.6px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-71c16dc8d6155ab2238e">{"x":{"visdat":{"53c57c7149b0":["function () ","plotlyVisDat"]},"cur_data":"53c57c7149b0","attrs":{"53c57c7149b0":{"x":{},"y":{},"text":{},"color":{},"colors":"viridis","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"domain":[0,1],"automargin":true,"title":"","tickangle":-45,"type":"category","categoryorder":"array","categoryarray":["American","Asian","Bakery","Cafe","Chinese","Delicatessen","French","Indian","Irish","Italian","Japanese","Latin","Mexican","Pizza","Pizza/Italian","Sandwiches","Spanish","Thai"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Median Score"},"bargap":0.25,"legend":{"title":{"text":"Grade"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["American","Asian","Bakery","Cafe","Chinese","Delicatessen","French","Indian","Irish","Italian","Japanese","Latin","Mexican","Pizza","Pizza/Italian","Sandwiches","Spanish","Thai"],"y":[10,11,10,9,11,11,10,11,11,11,11,11,11,11,11,10,11,11],"text":["American<br />Median Score: 10<br />Grade: A","Asian<br />Median Score: 11<br />Grade: A","Bakery<br />Median Score: 10<br />Grade: A","Cafe<br />Median Score: 9<br />Grade: A","Chinese<br />Median Score: 11<br />Grade: A","Delicatessen<br />Median Score: 11<br />Grade: A","French<br />Median Score: 10<br />Grade: A","Indian<br />Median Score: 11<br />Grade: A","Irish<br />Median Score: 11<br />Grade: A","Italian<br />Median Score: 11<br />Grade: A","Japanese<br />Median Score: 11<br />Grade: A","Latin<br />Median Score: 11<br />Grade: A","Mexican<br />Median Score: 11<br />Grade: A","Pizza<br />Median Score: 11<br />Grade: A","Pizza/Italian<br />Median Score: 11<br />Grade: A","Sandwiches<br />Median Score: 10<br />Grade: A","Spanish<br />Median Score: 11<br />Grade: A","Thai<br />Median Score: 11<br />Grade: A"],"type":"bar","name":"A","marker":{"color":"rgba(68,1,84,1)","line":{"color":"rgba(68,1,84,1)"}},"textfont":{"color":"rgba(68,1,84,1)"},"error_y":{"color":"rgba(68,1,84,1)"},"error_x":{"color":"rgba(68,1,84,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["American","Asian","Bakery","Cafe","Chinese","Delicatessen","French","Indian","Irish","Italian","Japanese","Latin","Mexican","Pizza","Pizza/Italian","Sandwiches","Spanish","Thai"],"y":[20,20,22,20,21,22,20,20,19,21,20,20,22,19.5,20,18,21,20],"text":["American<br />Median Score: 20<br />Grade: B","Asian<br />Median Score: 20<br />Grade: B","Bakery<br />Median Score: 22<br />Grade: B","Cafe<br />Median Score: 20<br />Grade: B","Chinese<br />Median Score: 21<br />Grade: B","Delicatessen<br />Median Score: 22<br />Grade: B","French<br />Median Score: 20<br />Grade: B","Indian<br />Median Score: 20<br />Grade: B","Irish<br />Median Score: 19<br />Grade: B","Italian<br />Median Score: 21<br />Grade: B","Japanese<br />Median Score: 20<br />Grade: B","Latin<br />Median Score: 20<br />Grade: B","Mexican<br />Median Score: 22<br />Grade: B","Pizza<br />Median Score: 19.5<br />Grade: B","Pizza/Italian<br />Median Score: 20<br />Grade: B","Sandwiches<br />Median Score: 18<br />Grade: B","Spanish<br />Median Score: 21<br />Grade: B","Thai<br />Median Score: 20<br />Grade: B"],"type":"bar","name":"B","marker":{"color":"rgba(33,144,141,1)","line":{"color":"rgba(33,144,141,1)"}},"textfont":{"color":"rgba(33,144,141,1)"},"error_y":{"color":"rgba(33,144,141,1)"},"error_x":{"color":"rgba(33,144,141,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":["American","Asian","Bakery","Cafe","Chinese","Delicatessen","French","Indian","Irish","Italian","Japanese","Latin","Mexican","Pizza","Pizza/Italian","Sandwiches","Spanish","Thai"],"y":[36,33,33.5,38,34,38,38,34,40,33,33,33,36,35,33,28,41,32],"text":["American<br />Median Score: 36<br />Grade: C","Asian<br />Median Score: 33<br />Grade: C","Bakery<br />Median Score: 33.5<br />Grade: C","Cafe<br />Median Score: 38<br />Grade: C","Chinese<br />Median Score: 34<br />Grade: C","Delicatessen<br />Median Score: 38<br />Grade: C","French<br />Median Score: 38<br />Grade: C","Indian<br />Median Score: 34<br />Grade: C","Irish<br />Median Score: 40<br />Grade: C","Italian<br />Median Score: 33<br />Grade: C","Japanese<br />Median Score: 33<br />Grade: C","Latin<br />Median Score: 33<br />Grade: C","Mexican<br />Median Score: 36<br />Grade: C","Pizza<br />Median Score: 35<br />Grade: C","Pizza/Italian<br />Median Score: 33<br />Grade: C","Sandwiches<br />Median Score: 28<br />Grade: C","Spanish<br />Median Score: 41<br />Grade: C","Thai<br />Median Score: 32<br />Grade: C"],"type":"bar","name":"C","marker":{"color":"rgba(253,231,37,1)","line":{"color":"rgba(253,231,37,1)"}},"textfont":{"color":"rgba(253,231,37,1)"},"error_y":{"color":"rgba(253,231,37,1)"},"error_x":{"color":"rgba(253,231,37,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>There doesn’t seem to be much variation in median score across A and B ratings; they seem to fall around 10 and 20 points for all cuisines, respectively. However, we do see more variation in median score for C grades. Spanish restaurants tend to have higher scores (again, meaning worse ratings) with a median of 41, the highest for the group; on the other end, sandwich shops tend to have lower median scores at 28 for a C grade.</p>
+</div>
+<div id="plot-3" class="section level3">
+<h3>Plot 3</h3>
 </div>
 
 
