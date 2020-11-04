@@ -84,7 +84,7 @@ pizza_df =
   )
 ```
 
-Let's examine the distribution of inspection score (higher score means worse performance) and grade of pizza restaurant. 
+Let's examine the distribution of inspection score (higher score means worse performance) and grade of pizza restaurant, separated by severity of violation (critical or not). 
 
 ```{r pizza_plot, warning = FALSE}
 pizza_plot = 
@@ -98,8 +98,8 @@ pizza_plot =
     text_label = str_c("Grade: ", grade, "\nScore: ", score)     
   ) %>% 
   plot_ly(x = ~grade, y = ~score, color = ~critical_flag, text = ~text_label,
-          type = "box", colors = "viridis", alpha = 0.5,
-          boxpoints = "all", jitter = 0.2, pointpos = -1.8) %>% 
+    type = "box", colors = "viridis", alpha = 0.5
+  ) %>% 
   layout(boxmode = "group", boxgap = .25, boxgroupgap = 0.5)
 
 pizza_plot
@@ -120,7 +120,13 @@ cuisine_plot =
   ) %>% 
   group_by(cuisine_description, grade) %>% 
   summarize(med_score = median(score)) %>% 
-  mutate(text_label = str_c("", cuisine_description, "\nMedian Score: ", med_score, "\nGrade: ", grade)) %>% 
+  mutate(
+    text_label = str_c(
+      "", cuisine_description,
+      "\nMedian Score: ", med_score, 
+      "\nGrade: ", grade
+      )
+  ) %>% 
   plot_ly(
     x = ~cuisine_description, y = ~med_score, color = ~grade,
     text = ~text_label, type = "bar", colors = "viridis"
@@ -135,5 +141,44 @@ cuisine_plot
 
 There doesn't seem to be much variation in median score across A and B ratings; they seem to fall around 10 and 20 points for all cuisines, respectively. However, we do see more variation in median score for C grades. Spanish restaurants tend to have higher scores (again, meaning worse ratings) with a median of 41, the highest for the group; on the other end, sandwich shops tend to have lower median scores at 28 for a C grade. 
 
-### Plot 3
+### Restaurant Closures
+
+Finally, going back to our full dataset, let's take a look at restaurants who were closed by DOHMH for critical violations, across all 5 boroughs, within 2016-2017. 
+
+```{r closure, message = FALSE}
+closure_df = 
+  rest_inspec %>% 
+  filter(str_detect(action, "[cC]losed") == TRUE,
+    critical_flag == "Critical",
+    inspection_date > "2016-01-01" & inspection_date <= "2017-12-31"
+  ) %>% 
+  select(-c(building, street, phone, record_date)) %>% 
+  mutate(
+    inspection_date = as.Date(inspection_date),
+    camis = as.character(camis),
+    dba = str_to_title(dba)
+  )
+
+closure_plot = 
+  closure_df %>%
+  mutate(
+    text_label = str_c(
+      "", dba,
+      "\n", inspection_date,
+      "\nScore: ", score
+    )
+  ) %>% 
+  plot_ly(x = ~inspection_date, y = ~score, color = ~boro, type = "scatter", 
+    colors = "viridis", alpha = 0.5, text = ~text_label) %>% 
+    layout(xaxis = list(title = "Inspection Date"), 
+         yaxis = list(title = "Score"))
+
+closure_plot  
+```
+
+While it can be a bit difficult to tell, this plot shows that there were more inspections that resulted in closure in 2017 overall, compared to 2016. There were also two standout restaurants: Margarita Island in Brooklyn, which had a score of 151, and Maman in Manhattan, with a score of 145. The darker a circle is, the more violations that restaurant had at that inspection that ultimately caused it to close. Number of violations is directly related to score, which is why the higher scores have darker points, and lower scores have lighter points. There does appear to be one likely entry error, with I Love NY Pizza receiving a score of 0.
+
+### Dashboard
+
+To see the composite dashboard of this analysis, please visit the dashboard page. 
 
