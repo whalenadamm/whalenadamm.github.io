@@ -4,7 +4,7 @@ navbar:
   title: "Home"
   right:
     - text: "CV"
-      href: cv.html
+      href: cv.pdf
     - text: "Plotly Example"
       href: plotly_restaurant.html
     - text: "Dashboard"

@@ -11,7 +11,7 @@
 
 
 
-<title>Adam Whalen, MPH(c)</title>
+<title>Adam Whalen, MPH</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -24,6 +24,15 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -69,6 +78,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -277,7 +287,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="cv.html">CV</a>
+  <a href="cv.pdf">CV</a>
 </li>
 <li>
   <a href="plotly_restaurant.html">Plotly Example</a>
@@ -287,19 +297,19 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="mailto:&lt;whalen.adamm@gmail.com&gt;">
-    <span class="fa fa-envelope fa-lg"></span>
+    <span class="fas fa-envelope fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="https://www.linkedin.com/in/whalenadamm/">
-    <span class="fa fa-linkedin fa-lg"></span>
+    <span class="fas fa-linkedin fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="http://github.com/whalenadamm/">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -312,7 +322,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Adam Whalen, MPH(c)</h1>
+<h1 class="title toc-ignore">Adam Whalen, MPH</h1>
 
 </div>
 
@@ -320,9 +330,9 @@ $(document).ready(function () {
 <div id="welcome" class="section level3">
 <h3>Welcome!</h3>
 <p><img src = "images/Adam.jpg" style = "width:30%; padding: 15px" align = "right"></p>
-<p>My name is Adam Whalen (pronouns: he/him/his) and I am a Master of Public Health student at the <a href="https://www.publichealth.columbia.edu/">Columbia University Mailman School of Public Health</a>, studying Epidemiology and Applied Biostatistics.</p>
+<p>My name is Adam Whalen (pronouns: he/him/his) and I am a Master of Public Health graduate of the <a href="https://www.publichealth.columbia.edu/">Columbia University Mailman School of Public Health</a> in Epidemiology and Applied Biostatistics.</p>
 <p>I’m interested in using robust analytical methods to investigate causal patterns of injury, violence, and disease along social, spatio-temporal, and political dimensions.</p>
-<p>I have experience using SAS, Stata, SQL, Microsoft Access, and R (how this website was built). My <a href="cv.html">CV</a> has a more complete description of my professional background.</p>
+<p>I have experience using SAS, Stata, SQL, Microsoft Access, and R (how this website was built). My <a href="cv.pdf">CV</a> has a more complete description of my professional background.</p>
 <p>For an example of data manipulation and visualization, please check out the NYC Restaurant Inspection analysis in <a href="plotly_restaurant.html">Plotly</a> and the subsequent <a href="dashboard.html">Flex Dashboard</a>.</p>
 </div>
 
@@ -335,7 +345,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
