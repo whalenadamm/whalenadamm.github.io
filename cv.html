@@ -13,12 +13,22 @@
 
 <title>Curriculum Vitae</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
@@ -38,11 +48,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -55,32 +60,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -91,10 +71,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -111,40 +87,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 61px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h2 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h3 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h4 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h5 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
-.section h6 {
-  padding-top: 66px;
-  margin-top: -66px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -172,7 +124,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -184,7 +136,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -195,10 +147,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -210,7 +175,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -336,7 +300,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -350,7 +314,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -363,7 +327,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="cv.pdf">CV</a>
+  <a href="cv_08302022.pdf">CV</a>
 </li>
 <li>
   <a href="plotly_restaurant.html">Plotly Example</a>
@@ -373,7 +337,7 @@ div.tocify {
 </li>
 <li>
   <a href="mailto:&lt;whalen.adamm@gmail.com&gt;">
-    <span class="fas fa-envelope fa-lg"></span>
+    <span class="fa fa-envelope fa-lg"></span>
      
   </a>
 </li>
@@ -394,7 +358,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -405,16 +369,20 @@ div.tocify {
 
 <div id="education" class="section level2">
 <h2>Education</h2>
-<div id="columbia-university-mailman-school-of-public-health" class="section level3">
+<div id="columbia-university-mailman-school-of-public-health"
+class="section level3">
 <h3>Columbia University Mailman School of Public Health</h3>
 <div id="new-york-ny" class="section level4">
 <h4>New York, NY</h4>
-Master of Public Health in Epidemiology, Certificate in Applied Biostatistics <br> Anticipated completion date: April 2021 <br>GPA: 4.0 <br> Relevant Coursework:
+Master of Public Health in Epidemiology, Certificate in Applied
+Biostatistics <br> Anticipated completion date: April 2021 <br>GPA: 4.0
+<br> Relevant Coursework:
 <ul>
 <li>
 Data Science I
 <li>
-Relational Databases and SQL Programming for Public Health and Data Science
+Relational Databases and SQL Programming for Public Health and Data
+Science
 <li>
 Application of Epidemiologic Research Methods
 <li>
@@ -426,47 +394,64 @@ Design &amp; Conduct of Observational Epidemiology
 <li>
 Applied Regression I &amp; II
 <li>
-<p>Spatial Epidemiology <br>President, Students for a National Health Program, Mailman Chapter</p>
+<p>Spatial Epidemiology <br>President, Students for a National Health
+Program, Mailman Chapter</p>
 </div>
 </div>
 <div id="santa-clara-university" class="section level3">
 <h3>Santa Clara University</h3>
 <div id="santa-clara-ca" class="section level4">
 <h4>Santa Clara, CA</h4>
-<p>Bachelor of Science in Public Health Science and Biology, Emphasis in Biomedical Sciences <br> Completion date: June 2015 <br> Honors Thesis: From the Ground Up: An Evidence-Based Intervention Proposal to Implement School Gardens as a Means to Reduce Type II Diabetes Incidence among Low-Income, At-Risk Populations</p>
+<p>Bachelor of Science in Public Health Science and Biology, Emphasis in
+Biomedical Sciences <br> Completion date: June 2015 <br> Honors Thesis:
+From the Ground Up: An Evidence-Based Intervention Proposal to Implement
+School Gardens as a Means to Reduce Type II Diabetes Incidence among
+Low-Income, At-Risk Populations</p>
 </div>
 </div>
 </div>
 <div id="employment-history" class="section level2">
 <h2>Employment History</h2>
-<div id="columbia-university-mailman-school-of-public-health-1" class="section level3">
+<div id="columbia-university-mailman-school-of-public-health-1"
+class="section level3">
 <h3>Columbia University Mailman School of Public Health</h3>
 <div id="new-york-ny-1" class="section level4">
 <h4>New York, NY</h4>
-Fall 2020 <br>Lead Teaching Assistant <br>Research Methods and Applications: Quantitative Foundations
+Fall 2020 <br>Lead Teaching Assistant <br>Research Methods and
+Applications: Quantitative Foundations
 <ul>
 <li>
-Administered cohort-wide introductory epidemiology and biostatistics course to 500 first-year Masters students
+Administered cohort-wide introductory epidemiology and biostatistics
+course to 500 first-year Masters students
 <li>
-Worked closely with faculty to develop and refine course structure, including material covered, assessment tools, and content development during COVID-19 pandemic pivot to remote/virtual learning
+Worked closely with faculty to develop and refine course structure,
+including material covered, assessment tools, and content development
+during COVID-19 pandemic pivot to remote/virtual learning
 <li>
-Manage and mentor team of 20 Teaching Assistants who deliver small group lab practice sessions
+Manage and mentor team of 20 Teaching Assistants who deliver small group
+lab practice sessions
 <li>
-<p>Handle course logistics, from course web platform design and delivery to student issues</p>
+<p>Handle course logistics, from course web platform design and delivery
+to student issues</p>
 </div>
 </div>
-<div id="nyc-department-of-health-and-mental-hygiene" class="section level3">
+<div id="nyc-department-of-health-and-mental-hygiene"
+class="section level3">
 <h3>NYC Department of Health and Mental Hygiene</h3>
 <div id="long-island-city-ny" class="section level4">
 <h4>Long Island City, NY</h4>
-Summer 2020 <br>Graduate Research Intern, Health Research Training Program <br>Summer 2020
+Summer 2020 <br>Graduate Research Intern, Health Research Training
+Program <br>Summer 2020
 <ul>
 <li>
-HRTP Intern in the Bureau of Epidemiology Services, Research &amp; Evaluation Unit
+HRTP Intern in the Bureau of Epidemiology Services, Research &amp;
+Evaluation Unit
 <li>
-Developed and executed analysis of multiple imputation methods for survey weighting by accuracy and precision in SAS
+Developed and executed analysis of multiple imputation methods for
+survey weighting by accuracy and precision in SAS
 <li>
-Assisted with SAS macro development and improvement for survey weighting for use in Healthy NYC Community Survey
+Assisted with SAS macro development and improvement for survey weighting
+for use in Healthy NYC Community Survey
 <ul>
 </div>
 </div>
@@ -477,25 +462,37 @@ Assisted with SAS macro development and improvement for survey weighting for use
 2017 - 2018 <br>Senior Patient Success Associate
 <ul>
 <li>
-Healthcare tech startup using nutrition and a telemedicine-powered continuous care model to reverse Type II diabetes
+Healthcare tech startup using nutrition and a telemedicine-powered
+continuous care model to reverse Type II diabetes
 <li>
-Oversaw and facilitated entire patient enrollment to online clinic for 3 clients (10k–50k employees each)
+Oversaw and facilitated entire patient enrollment to online clinic for 3
+clients (10k–50k employees each)
 <li>
-Designed, planned, and executed processes to improve overall enrollment conversion and median days to enroll
+Designed, planned, and executed processes to improve overall enrollment
+conversion and median days to enroll
 <li>
-Maintained relationships with external client contacts, and managed contract partner company work
+Maintained relationships with external client contacts, and managed
+contract partner company work
 <li>
-Identified system issues and escalated bugs appropriately with supporting data and impact measures (users affected, e.g.)
+Identified system issues and escalated bugs appropriately with
+supporting data and impact measures (users affected, e.g.)
 <li>
-Performed regular audits of tools and workflows to ensure data integrity, accuracy, and adoption by teammates
+Performed regular audits of tools and workflows to ensure data
+integrity, accuracy, and adoption by teammates
 <li>
-Shared successful processes with other teams, including unique user tracking and database queries, leading to increased product sustainability, greater tool usability for coworkers, and more effective conversion and retention for onboarded patients
+Shared successful processes with other teams, including unique user
+tracking and database queries, leading to increased product
+sustainability, greater tool usability for coworkers, and more effective
+conversion and retention for onboarded patients
 <li>
-Implemented a confidential bias incident reporting tool for company’s internal Diversity Group to promote employee safety
+Implemented a confidential bias incident reporting tool for company’s
+internal Diversity Group to promote employee safety
 <li>
-Served on the internal office relocation planning team, assessing needs for diverse team, and securing gender neutral restrooms
+Served on the internal office relocation planning team, assessing needs
+for diverse team, and securing gender neutral restrooms
 <li>
-<p>Participated in quarterly company-wide hackathon projects, delivering user-ready final products or concepts within three days</p>
+<p>Participated in quarterly company-wide hackathon projects, delivering
+user-ready final products or concepts within three days</p>
 </div>
 </div>
 <div id="jesuit-volunteer-corps" class="section level3">
@@ -505,25 +502,36 @@ Served on the internal office relocation planning team, assessing needs for dive
 2015-2016 <br>Program Coordinator, Back on My Feet Baltimore
 <ul>
 <li>
-Served as individual case manager for residential members recovering from addiction, incarceration, or homelessness
+Served as individual case manager for residential members recovering
+from addiction, incarceration, or homelessness
 <li>
-Facilitated financial literacy, job readiness, resume prep, and goal-setting workshops with corporate partners from community
+Facilitated financial literacy, job readiness, resume prep, and
+goal-setting workshops with corporate partners from community
 <li>
-Worked with circuit court judicial team and other local non-profit providers on inaugural Veterans’ Diversion Court initiative, allowing veterans with drug-related offenses to receive social service support and treatment instead of incarceration
+Worked with circuit court judicial team and other local non-profit
+providers on inaugural Veterans’ Diversion Court initiative, allowing
+veterans with drug-related offenses to receive social service support
+and treatment instead of incarceration
 <li>
-<p>Managed relationships with volunteers, professional partners, and staff at residential housing facilities</p>
+<p>Managed relationships with volunteers, professional partners, and
+staff at residential housing facilities</p>
 </div>
 </div>
-<div id="department-of-biology-santa-clara-university" class="section level3">
+<div id="department-of-biology-santa-clara-university"
+class="section level3">
 <h3>Department of Biology, Santa Clara University</h3>
 <div id="santa-clara-ca-1" class="section level4">
 <h4>Santa Clara, CA</h4>
 Spring 2014 <br> Teaching Assistant, Medical Microbiology
 <ul>
 <li>
-Assist students in learning basics of microbiological benchwork including aceptic technique and use of a negative-pressure anaerobic chamber
+Assist students in learning basics of microbiological benchwork
+including aceptic technique and use of a negative-pressure anaerobic
+chamber
 <li>
-<p>Work closely with faculty to deliver lab-based instruction and assistance with student projects, including antibacterial testing, environmental sampling, and rectal swab retrieval and analysis</p>
+<p>Work closely with faculty to deliver lab-based instruction and
+assistance with student projects, including antibacterial testing,
+environmental sampling, and rectal swab retrieval and analysis</p>
 </div>
 </div>
 </div>
@@ -566,12 +574,21 @@ Google API query language
 </div>
 <div id="research-and-publications" class="section level2">
 <h2>Research and Publications</h2>
-<p>Mielenz TJ, Whalen AM. “The Effects of Self-Care Health Behaviors on Driving Cessation Rates among Aging Drivers: The AAA LongROAD Study.” In progress.</p>
-<p>Whalen AM, Wang SM. “An evaluation of imputation methods for survey weighting.” Poster. Department of Epidemiology, Columbia University Mailman School of Public Health.</p>
+<p>Mielenz TJ, Whalen AM. “The Effects of Self-Care Health Behaviors on
+Driving Cessation Rates among Aging Drivers: The AAA LongROAD Study.” In
+progress.</p>
+<p>Whalen AM, Wang SM. “An evaluation of imputation methods for survey
+weighting.” Poster. Department of Epidemiology, Columbia University
+Mailman School of Public Health.</p>
 </div>
 <div id="awards-and-recognition" class="section level2">
 <h2>Awards and Recognition</h2>
-<p>Eagle Scout Award, Boy Scouts of America (Awarded: 4/10/2010) <br>Dean’s Scholarship, Santa Clara University (Awarded: September 2011) <br>Keynote Speaker, Ignite Leadership Conference, Center for Student Involvment, Santa Clara University (Awarded: October 2016) <br>Dean’s Scholarship, Columbia University Mailman School of Public Health (Awarded: September 2019)</p>
+<p>Eagle Scout Award, Boy Scouts of America (Awarded: 4/10/2010)
+<br>Dean’s Scholarship, Santa Clara University (Awarded: September 2011)
+<br>Keynote Speaker, Ignite Leadership Conference, Center for Student
+Involvment, Santa Clara University (Awarded: October 2016) <br>Dean’s
+Scholarship, Columbia University Mailman School of Public Health
+(Awarded: September 2019)</p>
 </div>
 
 
@@ -603,7 +620,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -612,6 +629,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
